@@ -1,0 +1,23 @@
+[
+  {
+    "featureType": "road.arterial",
+    "elementType": "geometry.fill",
+    "stylers": [
+      {
+        "color": "#99d1b0"
+      }
+    ]
+  },
+  {
+    "featureType": "road.highway",
+    "elementType": "geometry",
+    "stylers": [
+      {
+        "color": "#02a266"
+      },
+      {
+        "weight": 1.5
+      }
+    ]
+  }
+]

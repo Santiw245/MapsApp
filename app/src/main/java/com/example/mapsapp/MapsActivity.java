@@ -9,6 +9,7 @@ import androidx.fragment.app.FragmentActivity;
 import android.Manifest;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -18,7 +19,10 @@ import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.BitmapDescriptor;
+import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.MapStyleOptions;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.example.mapsapp.databinding.ActivityMapsBinding;
@@ -61,7 +65,10 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
 
         // Add a marker in Sydney and move the camera
         LatLng vokasi = new LatLng(-7.775483150076203, 110.37424841780428);
+        LatLng kos = new LatLng(-7.777208701429787, 110.3600083520525);
+
         mMap.addMarker(new MarkerOptions().position(vokasi).title("Marker in Vokasi"));
+        mMap.addMarker(new MarkerOptions().position(kos).icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_BLUE)).title("Maker in Kos"));
 //        mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney));
         mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(vokasi,15));
 //        1,5,10,15,20
@@ -69,6 +76,7 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
         setMapLongClick(mMap);
         setPointClick(mMap);
         enableMyLocation();
+        setMapStyle();
     }
 
     @Override
@@ -145,6 +153,13 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
                     enableMyLocation();
                     break;
                 }
+        }
+    }
+
+    public void setMapStyle(){
+        boolean result = mMap.setMapStyle(MapStyleOptions.loadRawResourceStyle(this, R.raw.style));
+        if (result){
+            Log.e("Map", "Error set style map");
         }
     }
 }
